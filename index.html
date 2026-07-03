@@ -240,13 +240,13 @@
   </style>
 </head>
 <body>
-
+  
   <div class="topbar">
     <div>Monday, 29 June 2026</div>
     <div class="top-icons">
       <span>🔍</span>
       <span>🌙</span>
-      <span>👤</span>
+      <span onclick="googleLogin()">👤</span>
     </div>
   </div>
 
@@ -315,6 +315,33 @@
   <footer class="footer">
     © 2026 News Website. All rights reserved.
   </footer>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBBIHGw6y5WmBYN7e0cqe1HR-LLRLFpa10",
+    authDomain: "vidyarkaalai-news.firebaseapp.com",
+    projectId: "vidyarkaalai-news",
+    storageBucket: "vidyarkaalai-news.appspot.com",
+    messagingSenderId: "480538471495",
+    appId: "1:480538471495:web:05068fffe2696875cf5562"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.googleLogin = function() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Login Successful:", result.user);
+      }).catch((error) => {
+        console.error("Login Error:", error);
+      });
+  };
+</script>
 
 </body>
 </html>1
