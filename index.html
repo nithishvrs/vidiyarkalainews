@@ -247,6 +247,7 @@
       <span>🔍</span>
       <span>🌙</span>
       <span onclick="googleLogin()">👤</span>
+      <img id="profile-image" src="" alt="Profile" style="width:40px; height:40px; border-radius:50%; display:none;">
     </div>
   </div>
 
@@ -272,7 +273,7 @@
     <div class="breaking-label">Breaking News</div>
     <div class="breaking-text">
       <marquee behavior="scroll" direction="left">
-        தமிழ்நாடு மற்றும் உலக அளவில் இப்போது வெளியாகி இருக்கும் முக்கியச் செய்திகள்: Nandhuuuh!!! 
+        தமிழ்நாடு மற்றும் உலக அளவில் இப்போது வெளியாகி இருக்கும் முக்கியச் செய்திகள்: Nithishuuhh !!! 
       </marquee>
     </div>
   </div>
@@ -344,6 +345,23 @@ const firebaseConfig = {
         console.error("Login Error:", error);
       });
   };
+  
+  // Firebase லாகின் ஆனவுடன், user தகவலைப் பெற:
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // User லாகின் செய்துவிட்டார்
+    const profilePicUrl = user.photoURL; // கூகுள் அக்கவுண்டிலிருந்து படத்தைப் பெறுதல்
+
+    // ஹெடரில் இருக்கும் image டேக்கைத் தேர்ந்தெடுத்து src-ஐ மாற்றவும்
+    const profileImg = document.getElementById('profile-image'); 
+    if (profileImg) {
+      profileImg.src = profilePicUrl;
+      profileImg.style.display = 'block'; // படத்தை மறைத்திருந்தால் காண்பிக்க
+    }
+  } else {
+    // User லாகின் செய்யவில்லை
+  }
+});
 </script>
 
 </body>
